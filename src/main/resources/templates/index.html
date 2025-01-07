@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Поиск</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <script th:src="@{/js/search.js}" defer></script>
+</head>
+<body>
+<header>
+  <div class="search-bar">
+    <form id="searchForm">
+      <input
+              type="text"
+              id="searchInput"
+              name="query"
+              placeholder="Введите текст для поиска..."
+              autocomplete="off">
+    </form>
+    <ul id="resultsDropdown" class="dropdown hidden"></ul>
+  </div>
+</header>
+</body>
+</html>

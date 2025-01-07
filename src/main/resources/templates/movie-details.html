@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${movie.nameRu}">Movie Details</title>
+    <link rel="stylesheet" href="/css/movie-details.css">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="|${movie.nameRu} (${movie.year})|">Название фильма</h1>
+    <img th:src="${movie.posterUrlPreview}" alt="Постер">
+    <p th:text="${movie.description}">Описание фильма</p>
+    <p>Год: <span th:text="${movie.year}">Год выпуска</span></p>
+    <p>Жанр: <span th:text="${movie.genre}">Жанр</span></p>
+    <p>Рейтинг Кинопоиск: <span th:text="${movie.ratingKinopoisk}">Рейтинг</span></p>
+    <p>Рейтинг Imdb: <span th:text="${movie.ratingImdb}">Рейтинг</span></p>
+</div>
+<footer>
+    © 2025 MovieLog
+</footer>
+</body>
+</html>

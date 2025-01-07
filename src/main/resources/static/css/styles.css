@@ -1,0 +1,143 @@
+/* Общий стиль страницы */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #74ebd5, #9face6); /* Градиентный фон */
+    color: #333;
+}
+
+/* Хедер */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9); /* Прозрачный фон */
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    text-align: center;
+}
+
+/* Строка поиска */
+.search-bar {
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.search-bar input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #007bff;
+    border-radius: 20px;
+    outline: none;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.search-bar input[type="text"]:focus {
+    border-color: #0056b3;
+}
+
+/* Выпадающий список */
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 5px;
+    list-style: none;
+    padding: 0;
+    z-index: 10;
+}
+
+.dropdown li {
+    position: relative; /* Родитель для размещения рейтинга внутри постера */
+    display: flex;
+    align-items: center; /* Выравнивание элементов по вертикали */
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: #007bff;
+}
+
+/* Подсветка на элементе списка при наведении */
+.dropdown li:hover {
+    background-color: #f0f8ff;
+}
+
+/* Постер фильма */
+.dropdown li img {
+    width: 50px;
+    height: 75px;
+    border-radius: 5px; /* Скругленные углы постера */
+}
+
+/* Текст с названием фильма */
+.dropdown li span {
+    margin-left: 10px; /* Расстояние между постером и текстом */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Троеточие для длинных текстов */
+    white-space: nowrap; /* Не переносить текст на новую строку */
+    text-align: left;
+    flex-grow: 1; /* Занимает оставшееся место */
+}
+
+/* Класс для скрытия выпадающего списка */
+.hidden {
+    display: none;
+}
+
+/* Контейнер для постера с рейтингом */
+.poster-container {
+    position: relative; /* Это необходимо для абсолютного позиционирования рейтинга внутри */
+    flex-shrink: 0; /* Запрещаем сжиматься изображению */
+    display: flex;
+    align-items: center; /* Выравнивание по центру для картинки и текста */
+}
+
+/* Постер внутри контейнера */
+.poster-container img {
+    width: 50px;
+    height: 75px;
+    border-radius: 5px; /* Скругленные углы постера */
+}
+
+/* Стили для рейтинга на постере */
+.poster-container .rating-badge {
+    position: absolute;
+    bottom: 5px; /* Расстояние от нижнего края постера */
+    right: 5px; /* Расстояние от правого края постера */
+    background-color: rgba(0, 0, 0, 0.7); /* Черный полупрозрачный фон */
+    color: #fff; /* Белый текст */
+    padding: 3px 6px;
+    border-radius: 5px; /* Скругленные углы для рейтинга */
+    font-size: 14px; /* Увеличенный размер шрифта для лучшего отображения */
+    font-weight: bold;
+    z-index: 5; /* Поверх изображения */
+}
+
+/* Стиль для ссылки (для перехода на страницу фильма) */
+.movie-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex; /* Сделаем ссылку блочной, но с флекс-выравниванием */
+    width: 100%; /* Ссылка занимает всю ширину li */
+    height: 100%; /* Ссылка охватывает всю высоту li */
+    padding: 10px;
+    transition: background-color 0.3s ease;
+    align-items: center; /* Центрируем элементы по вертикали */
+}
+
+/* Подсветка при наведении на ссылку */
+.movie-link:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
