@@ -32,10 +32,10 @@ public class KinopoiskApiServiceImpl implements KinopoiskApiService {
 
 
     @Override
-    public Movie getMovieById(String endpoint) {
+    public Movie getMovieById(String id) {
 
         String url = UriComponentsBuilder
-                .fromUriString(properties.getBaseUrl() + endpoint)
+                .fromUriString(properties.getBaseUrl() + "/v2.2/films/" + id)
                 .build(false)
                 .toUriString();
 
@@ -52,11 +52,9 @@ public class KinopoiskApiServiceImpl implements KinopoiskApiService {
             JsonNode filmNode = objectMapper.readTree(response.getBody());
 
             return objectMapper.readValue(filmNode.toString(), Movie.class);
-        }
-        catch (HttpClientErrorException e) {
+        } catch (HttpClientErrorException e) {
             throw new RuntimeException("Ошибка при запросе: " + e.getStatusCode() + " - " + e.getResponseBodyAsString(), e);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException("Ошибка при запросе к API: " + e.getMessage(), e);
         }
     }
@@ -82,7 +80,8 @@ public class KinopoiskApiServiceImpl implements KinopoiskApiService {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode filmsNode = objectMapper.readTree(response.getBody()).get("films");
 
-            return objectMapper.readValue(filmsNode.toString(), new TypeReference<>() {});
+            return objectMapper.readValue(filmsNode.toString(), new TypeReference<>() {
+            });
         } catch (HttpClientErrorException e) {
             throw new RuntimeException("Ошибка при запросе: " + e.getStatusCode() + " - " + e.getResponseBodyAsString(), e);
         } catch (Exception e) {

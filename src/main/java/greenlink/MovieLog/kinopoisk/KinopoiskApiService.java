@@ -10,6 +10,7 @@ import java.util.Map;
 public interface KinopoiskApiService {
 
     Movie getMovieById(String endpoint);
+
     ArrayList<SearchedMovie> getMoviesByName(String endpoint, Map<String, List<String>> queryParams);
 
 }

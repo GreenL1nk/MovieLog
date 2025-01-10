@@ -34,8 +34,8 @@ public class FilmController implements BaseMovieController {
 
         Movie movieById = movieService.getMovieById(id);
         if (movieById == null) {
-            movieById = kinopoiskApiServiceImpl.getMovieById("/v2.2/films/" + id);
-            movieService.save(movieById);
+            movieById = kinopoiskApiServiceImpl.getMovieById(String.valueOf(id));
+            movieService.saveMoviesAsync(movieById);
         }
 
         model.addAttribute("movie", movieById);

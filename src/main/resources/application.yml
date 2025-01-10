@@ -2,13 +2,13 @@ spring.application.name: MovieLog
 
 kinopoisk:
   baseUrl: https://kinopoiskapiunofficial.tech/api
-  apiKey: your_api_key
+  apiKey: ${KP_API_KEY}
 
 spring:
   datasource:
-    url: your_url
-    username: your_username
-    password: your_password
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
     driver-class-name: org.postgresql.Driver
   devtools:
     restart:
@@ -17,10 +17,11 @@ spring:
       enabled: true
 
   jpa:
+    open-in-view: false
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     properties.hibernate.format_sql: true

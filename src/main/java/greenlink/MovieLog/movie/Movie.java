@@ -1,8 +1,14 @@
 package greenlink.MovieLog.movie;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
@@ -20,11 +26,12 @@ public class Movie {
     Long kinopoiskId;
 
     String nameRu;
+    String nameEn;
 
     Double ratingKinopoisk;
     Double ratingImdb;
 
-    @Column(length = 1000)
+    @Column(length = 2500)
     String description;
 
     String posterUrlPreview;
