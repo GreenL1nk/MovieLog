@@ -2,12 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:text="${movie.nameRu}">Movie Details</title>
-    <link rel="stylesheet" href="/css/movie-details.css">
+    <link rel="stylesheet" th:href="@{/css/movie-details.css}">
 </head>
 <body>
 <div class="container">
     <h1 th:text="|${movie.nameRu} (${movie.year})|">Название фильма</h1>
     <img th:src="${movie.posterUrlPreview}" alt="Постер">
+    <a th:href="|https://reyohoho.github.io/reyohoho/#${movie.kinopoiskId}|" target="_blank" class="watch-button">Смотреть</a>
     <p th:text="${movie.description}">Описание фильма</p>
     <p>Год: <span th:text="${movie.year}">Год выпуска</span></p>
     <p>Жанр: <span th:text="${movie.genre}">Жанр</span></p>

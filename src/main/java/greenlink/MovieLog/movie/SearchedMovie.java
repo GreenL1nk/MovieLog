@@ -9,8 +9,10 @@ import lombok.Getter;
 public class SearchedMovie {
 
     Long filmId;
+    Long kinopoiskId;
     String nameRu;
     Double rating;
+    Double ratingKinopoisk;
     int year;
     String posterUrlPreview;
 

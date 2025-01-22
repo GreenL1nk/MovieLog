@@ -3,7 +3,9 @@
 <head>
     <title>Поиск</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/collections.css}">
     <script th:src="@{/js/search.js}" defer></script>
+    <script th:src="@{/js/collections.js}" defer></script>
 </head>
 <body>
 <header>
@@ -13,11 +15,34 @@
                     type="text"
                     id="searchInput"
                     name="query"
-                    placeholder="Введите текст для поиска..."
+                    placeholder="Введите фильм для поиска..."
                     autocomplete="off">
         </form>
         <ul id="resultsDropdown" class="dropdown hidden"></ul>
     </div>
 </header>
+<main>
+    <div class="collections">
+        <div th:each="entry : ${topcollections}" class="collection-container">
+            <h2 th:text="${entry.key.ruName}"></h2>
+            <div class="movies-container">
+                <button class="scroll-btn left" onclick="scrollLeft(this)">&#8249;</button>
+                <div class="movies">
+                    <div th:each="movie : ${entry.value}" class="card">
+                        <a th:href="@{/film/{id}(id=${movie.kinopoiskId})}" class="collection-movie-link">
+                            <div class="card_view">
+                                <img th:src="${movie.posterUrlPreview}" th:alt="${movie.nameRu}" class="card_img">
+                                <div class="card_rating" th:text="${movie.ratingKinopoisk}"></div>
+                            </div>
+                            <div class="card_title" th:text="${movie.nameRu}"></div>
+                            <div class="card_year" th:text="${movie.year}"></div>
+                        </a>
+                    </div>
+                </div>
+                <button class="scroll-btn right" onclick="scrollRight(this)">&#8250;</button>
+            </div>
+        </div>
+    </div>
+</main>
 </body>
 </html>

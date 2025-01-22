@@ -15,9 +15,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class KinopoiskApiServiceImpl implements KinopoiskApiService {
@@ -30,41 +28,47 @@ public class KinopoiskApiServiceImpl implements KinopoiskApiService {
         this.properties = properties;
     }
 
-
     @Override
     public Movie getMovieById(String id) {
+        String endpoint = "/v2.2/films/" + id;
+        JsonNode responseNode = performApiRequest(endpoint, null);
 
-        String url = UriComponentsBuilder
-                .fromUriString(properties.getBaseUrl() + "/v2.2/films/" + id)
-                .build(false)
-                .toUriString();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("X-API-KEY", properties.getApiKey());
-        headers.add("accept", "application/json");
-
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
+        ObjectMapper objectMapper = new ObjectMapper();
         try {
-            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
-
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode filmNode = objectMapper.readTree(response.getBody());
-
-            return objectMapper.readValue(filmNode.toString(), Movie.class);
-        } catch (HttpClientErrorException e) {
-            throw new RuntimeException("Ошибка при запросе: " + e.getStatusCode() + " - " + e.getResponseBodyAsString(), e);
+            return objectMapper.readValue(responseNode.toString(), Movie.class);
         } catch (Exception e) {
-            throw new RuntimeException("Ошибка при запросе к API: " + e.getMessage(), e);
+            throw new RuntimeException("Ошибка при десериализации фильма: " + e.getMessage(), e);
         }
     }
 
     @Override
     public ArrayList<SearchedMovie> getMoviesByName(String endpoint, Map<String, List<String>> queryParams) {
+        JsonNode filmsNode = performApiRequest(endpoint, queryParams).get("films");
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.readValue(filmsNode.toString(), new TypeReference<>() {});
+        } catch (Exception e) {
+            throw new RuntimeException("Ошибка при десериализации фильмов: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public ArrayList<SearchedMovie> getMoviesByTop(String endpoint, Map<String, List<String>> queryParams) {
+        JsonNode filmsNode = performApiRequest(endpoint, queryParams).get("items");
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.readValue(filmsNode.toString(), new TypeReference<>() {});
+        } catch (Exception e) {
+            throw new RuntimeException("Ошибка при десериализации фильмов: " + e.getMessage(), e);
+        }
+    }
+
+    private JsonNode performApiRequest(String endpoint, Map<String, List<String>> queryParams) {
         String url = UriComponentsBuilder
                 .fromUriString(properties.getBaseUrl() + endpoint)
-                .queryParams(CollectionUtils.toMultiValueMap(queryParams))
+                .queryParams(CollectionUtils.toMultiValueMap(queryParams != null ? queryParams : new HashMap<>()))
                 .build(false)
                 .toUriString();
 
@@ -76,12 +80,8 @@ public class KinopoiskApiServiceImpl implements KinopoiskApiService {
 
         try {
             ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
-
             ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode filmsNode = objectMapper.readTree(response.getBody()).get("films");
-
-            return objectMapper.readValue(filmsNode.toString(), new TypeReference<>() {
-            });
+            return objectMapper.readTree(response.getBody());
         } catch (HttpClientErrorException e) {
             throw new RuntimeException("Ошибка при запросе: " + e.getStatusCode() + " - " + e.getResponseBodyAsString(), e);
         } catch (Exception e) {

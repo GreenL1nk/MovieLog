@@ -13,4 +13,6 @@ public interface KinopoiskApiService {
 
     ArrayList<SearchedMovie> getMoviesByName(String endpoint, Map<String, List<String>> queryParams);
 
+    ArrayList<SearchedMovie> getMoviesByTop(String endpoint, Map<String, List<String>> queryParams);
+
 }

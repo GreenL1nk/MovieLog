@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     background: linear-gradient(135deg, #74ebd5, #9face6); /* Градиентный фон */
-    color: #333;
+    color: #ffffff;
 }
 
 /* Хедер */
@@ -12,33 +12,9 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.9); /* Прозрачный фон */
     padding: 15px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 10;
     text-align: center;
-}
-
-/* Строка поиска */
-.search-bar {
-    width: 80%;
-    max-width: 600px;
-    margin: 0 auto;
-    position: relative;
-}
-
-.search-bar input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #007bff;
-    border-radius: 20px;
-    outline: none;
-    font-size: 16px;
-    transition: border-color 0.3s;
-}
-
-.search-bar input[type="text"]:focus {
-    border-color: #0056b3;
 }
 
 /* Выпадающий список */
@@ -49,7 +25,7 @@ header {
     width: 100%;
     max-height: 300px;
     overflow-y: auto;
-    background-color: #fff;
+    background: rgb(0 0 0 / 60%);
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -129,15 +105,38 @@ header {
 .movie-link {
     text-decoration: none;
     color: inherit;
-    display: flex; /* Сделаем ссылку блочной, но с флекс-выравниванием */
-    width: 100%; /* Ссылка занимает всю ширину li */
-    height: 100%; /* Ссылка охватывает всю высоту li */
+    display: flex;
+    width: 100%;
+    height: 100%;
     padding: 10px;
     transition: background-color 0.3s ease;
-    align-items: center; /* Центрируем элементы по вертикали */
+    align-items: center;
 }
 
 /* Подсветка при наведении на ссылку */
 .movie-link:hover {
     background-color: rgba(0, 0, 0, 0.1);
+}
+
+.search-bar {
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.search-bar input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid rgb(0 0 0);
+    border-radius: 20px;
+    outline: none;
+    font-size: 16px;
+    transition: border-color 0.3s;
+    background: rgb(0 0 0 / 60%);
+    color: white
+}
+
+.search-bar input[type="text"]:focus {
+    border-color: #0056b3;
 }

@@ -42,6 +42,7 @@ span {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 footer {
@@ -49,4 +50,23 @@ footer {
     margin-top: 20px;
     font-size: 0.9rem;
     color: #aaa;
+}
+
+.watch-button {
+    display: inline-block; /* Блочный элемент для выравнивания */
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ff4500; /* Яркий оранжевый цвет */
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.watch-button:hover {
+    background-color: #e03e00; /* Темнее при наведении */
 }
